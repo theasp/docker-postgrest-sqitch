@@ -1,0 +1,23 @@
+---
+version: '3'
+
+services:
+  postgrest:
+    image: postgrest-mydb
+    build: .
+    ports:
+      - "3000:3000"
+    restart: always
+    environment:
+      PGRST_DB_URI: postgres://mydb:mydb@postgres:5432/mydb
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: anonymous
+      PGRST_SERVER_PROXY_URI: http://localhost:3000
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: mydb
+      POSTGRES_PASSWORD: mydb

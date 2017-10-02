@@ -1,0 +1,5 @@
+%syntax-version=1.0.0
+%project=postgrest
+
+appschema 2017-10-02T18:49:22Z Andrew Phillips <theasp@gmail.com> # Add schema
+anonymous 2017-10-02T19:17:57Z Andrew Phillips <theasp@gmail.com> # Anonymous user
