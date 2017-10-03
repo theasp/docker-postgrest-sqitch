@@ -2,7 +2,7 @@
 
 Run [PostgREST](https://postgrest.com/) after deploying a schema using [Sqitch](http://sqitch.org/), based on the [offical PostgREST image](https://hub.docker.com/r/postgrest/postgrest/).
 
-Add your Sqitch configuration to `/sqitch` by building a new image, or by mounting a volume.  The schema will be deployed to `$PGRST_DB_URI`.  If `$SQITCH_VERIFY` is true (the default), then `sqitch verify` will be called after deploying.
+Add your Sqitch configuration to `/sqitch` by building a new image, or by mounting a volume.  The schema will be deployed to `PGRST_DB_URI`.  If `SQITCH_VERIFY` is true (the default), then `sqitch verify` will be called after deploying.
 
 # Example `Dockerfile`
 
