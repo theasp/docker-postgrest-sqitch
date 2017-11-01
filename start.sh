@@ -14,6 +14,7 @@ EOF
 if [ -e /sqitch/sqitch.plan ]; then
   (
     cd /sqitch
+    sqitch status -t postgrest || true
     sqitch deploy -t postgrest
     if [ "${SQITCH_VERIFY:-true}" = true ]; then
       sqitch verify -t postgrest
