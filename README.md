@@ -6,9 +6,10 @@ Add your Sqitch configuration to `/sqitch` by building a new image, or by mounti
 
 # Environment Variables
 
-- `PGRST_DB_URI` - Database URI (Required)
-- `SQITCH_DEPLOY` - The sqitch command to use to deploy (default "deploy")
-- `SQITCH_VERIFY` - The sqitch command to use to verify, or skip on empty string (default "verify")
+- `PGRST_DB_URI` (required) - Database URI
+- `SQITCH_DEPLOY` (default `deploy`) - The sqitch command to use to deploy.  You can use this to pass arguments as well, for example `deploy --merge`.
+- `SQITCH_VERIFY` (default `verify`) - The sqitch command to use to verify, or skip on empty string.
+- `SQITCH_REQUIRED` (default `true`) - If set to `true`, postgrest will not be started if there is a problem with sqitch.
 
 # Example `Dockerfile`
 
@@ -34,6 +35,7 @@ services:
       PGRST_DB_SCHEMA: public
       PGRST_DB_ANON_ROLE: anonymous
       PGRST_SERVER_PROXY_URI: http://localhost:3000
+      SQITCH_DEPLOY: deploy --merge
 
   postgres:
     image: postgres
