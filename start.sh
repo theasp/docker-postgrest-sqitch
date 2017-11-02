@@ -19,6 +19,8 @@ cat > ~/.sqitch/sqitch.conf <<EOF
   uri = ${PGRST_DB_URI:-db:pg://}
 EOF
 
+set -x
+
 if [ -e /sqitch/sqitch.plan ]; then
   if ! (cd /sqitch && do_sqitch); then
     RC=$?
