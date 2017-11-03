@@ -18,15 +18,30 @@ cat > ~/.sqitch/sqitch.conf <<EOF
   engine = pg
 EOF
 
-set -x
+SQITCH_DIR=/sqitch
+SQITCH_PLAN=$SQITCH_DIR/sqitch.plan
 
-if [ -e /sqitch/sqitch.plan ]; then
-  if ! (cd /sqitch && do_sqitch); then
+if [ -e $SQITCH_PLAN ]; then
+  if [ ${SQITCH_REQUIRED:-auto} = auto ]; then
+    SQITCH_REQUIRED=true
+  fi
+
+  if ! (cd $SQITCH_DIR && do_sqitch); then
     RC=$?
 
-    if [ ${SQITCH_REQUIRED:-true} = true ]; then
+    if [ ${SQITCH_REQUIRED} = true ]; then
+      error "WARNING: Sqitch returned $RC" 1>&2
       exit $RC
+    else
+      echo "WARNING: Sqitch returned $RC" 1>&2
     fi
+  fi
+else
+  if [ ${SQITCH_REQUIRED} = true ]; then
+    echo "ERROR: Missing $SQITCH_PLAN" 1>&2
+    exit 1
+  else
+    echo "WARNING: Missing $SQITCH_PLAN" 1>&2
   fi
 fi
 

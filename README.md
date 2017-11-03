@@ -9,7 +9,7 @@ Add your Sqitch configuration to `/sqitch` by building a new image, or by mounti
 - `PGRST_DB_URI` (required) - Database URI
 - `SQITCH_DEPLOY` (default `deploy`) - The sqitch command to use to deploy.  You can use this to pass arguments as well, for example `deploy --verify`.
 - `SQITCH_VERIFY` (default `verify`) - The sqitch command to use to verify, or skip on empty string.
-- `SQITCH_REQUIRED` (default `true`) - If set to `true`, postgrest will not be started if there is a problem with sqitch.
+- `SQITCH_REQUIRED` (default `auto`) - If set to `true`, postgrest will not be started if there is a problem with sqitch.  If set to `auto` then sqitch will be skipped if there is no `sqitch.plan` available.
 
 # Example `Dockerfile`
 
