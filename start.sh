@@ -2,11 +2,13 @@
 
 set -e
 
+PGRST_DB_URI="${PGRST_DB_URI:-pg://}"
+
 do_sqitch() {
-  sqitch status -t postgrest || true
-  sqitch ${SQITCH_DEPLOY:-deploy} -t postgrest
+  sqitch status "db:${PGRST_DB_URI}" || true
+  sqitch ${SQITCH_DEPLOY:-deploy} "db:${PGRST_DB_URI}"
   if [ "${SQITCH_VERIFY}" ]; then
-    sqitch ${SQITCH_VERIFY} -t postgrest
+    sqitch ${SQITCH_VERIFY} "db:${PGRST_DB_URI}"
   fi
 }
 
@@ -14,9 +16,6 @@ mkdir -p ~/.sqitch
 cat > ~/.sqitch/sqitch.conf <<EOF
 [core]
   engine = pg
-
-[target "postgrest"]
-  uri = ${PGRST_DB_URI:-db:pg://}
 EOF
 
 set -x
