@@ -30,7 +30,7 @@ if [ -e $SQITCH_PLAN ]; then
     RC=$?
 
     if [ ${SQITCH_REQUIRED} = true ]; then
-      error "WARNING: Sqitch returned $RC" 1>&2
+      echo "ERROR: Sqitch returned $RC" 1>&2
       exit $RC
     else
       echo "WARNING: Sqitch returned $RC" 1>&2
