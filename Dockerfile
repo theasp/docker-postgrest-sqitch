@@ -7,4 +7,4 @@ RUN set -ex; \
   cpan App::Sqitch
 ADD start.sh /start.sh
 CMD /start.sh
-ENV SQITCH_DEPLOY=deploy SQITCH_VERIFY=verify SQITCH_REQUIRED=true
+ENV SQITCH_DEPLOY=deploy SQITCH_VERIFY=verify SQITCH_REQUIRED=true PGRST_QUIET=false
