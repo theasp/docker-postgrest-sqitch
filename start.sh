@@ -46,8 +46,11 @@ else
 fi
 
 # Add support for PGRST_QUIET
-if [ -n ${PGRST_QUIET} ] && ! grep -q ^quiet /etc/postgrest.conf; then
+export PGRST_QUIET=${PGRST_QUIET:-false}
+if ! grep -q ^quiet /etc/postgrest.conf; then
   echo 'quiet = "$(PGRST_QUIET)"' >> /etc/postgrest.conf
 fi
+
+
 
 exec postgrest /etc/postgrest.conf $PGRST_ARGS
